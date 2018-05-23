@@ -1,0 +1,16 @@
+.purchase-control {
+    margin-bottom: 40px;
+}
+
+.data-table {
+    margin-bottom: 60px;
+}
+
+table tbody tr.selected {
+    background-color: lightgrey;
+}
+
+table tbody tr:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+}

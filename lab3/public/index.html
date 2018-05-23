@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta title="description" content="">
+    <meta title="author" content="">
+
+    <title>lab3</title>
+
+    <link href="{{contextPath}}/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{contextPath}}/css/style.css">
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Product list</h2>
+        <p class="lead">Product list separated by product type</p>
+    </div>
+
+    <div class="row purchase-control">
+        <div class="col-7">
+            <div class="input-group">
+                <select class="custom-select" id="owners-list">
+                    {{#each owners}}
+                        {{#if @first}}
+                            <option selected value="{{this}}">{{this}}</option>
+                        {{else}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/if}}
+                    {{/each}}
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="add-owner" data-toggle="modal" data-target="#ownerModal">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2"></div>
+
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="sync" data-toggle="modal" data-target="#syncModal">Synchronize</button>
+        </div>
+    </div>
+
+    <div class="row data-table">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each purchase.items as |purchaseItem|}}
+                    <tr>
+                        <th scope="row">{{@index}}</th>
+                        <td>{{purchaseItem.name}}</td>
+                        <td>{{purchaseItem.quantity}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="title">Title</span>
+                </div>
+                <input id="title-input" type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="title">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="quantity">Quantity</span>
+                </div>
+                <input id="quantity-input" type="number" class="form-control" min="0" aria-describedby="quantity">
+            </div>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="add-item">Add</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col">
+            <button id="delete-item" type="button" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2018 Roman Alekseev</p>
+    </footer>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="syncModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Synchronize</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="token">Token</span>
+                    </div>
+                    <input id="token-input" type="text" class="form-control" placeholder="Token" aria-label="Token" aria-describedby="token">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submit-synchronize">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="ownerModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add owner</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="owner">Owner</span>
+                    </div>
+                    <input id="owner-input" type="text" class="form-control" placeholder="Owner" aria-label="Owner" aria-describedby="owner">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="create-owner" type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{{contextPath}}/js/jquery-3.3.1.min.js"></script>
+<script src="{{contextPath}}/js/bootstrap/bootstrap.js"></script>
+<script src="{{contextPath}}/js/index.js"></script>
+</body>
+
+</html>
